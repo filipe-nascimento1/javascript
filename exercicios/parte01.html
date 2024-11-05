@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hora do Dia</title>
+    <style>
+      body, section{
+        text-align: center;
+      }
+      body{
+        background-color: #838383;
+        color: white;
+      }
+      section{
+        background-color: white;
+        color: black;
+        max-width: 450px;
+        margin: auto;
+        border-radius: 10px;
+        box-shadow: 1px 1px 1px black;
+        font-size: 22px;
+      }
+      img{
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Hora do Dia</h1>
+    <section>
+      <br />
+      <p>hours</p>
+      <img src="parte01-img/0.jpeg" alt="" />
+    </section>
+    <p>&copy filipe-nascimento1</p>
+    <script>
+      const data = new Date()
+      let horas = data.getHours()
+      
+      const corpo = document.querySelector("body").style
+      const secao = document.querySelector("section")
+      const paragrafo = document.querySelector("section > p")
+      const imagem = document.querySelector("section > img")
+      
+      
+      
+      paragrafo.innerHTML = `<p>Agora são exatamente ${horas} horas</p>`
+      if (horas < 12 && horas > 5) {
+        imagem.src = "parte01-img/1.jpeg"
+        corpo.backgroundColor = '#d49c4f'
+      } else if (horas < 18 && horas > 11) {
+        imagem.src = "parte01-img/2.jpeg"
+        corpo.backgroundColor = '#53784ac6'
+      } else if (horas < 24 && horas > 17) {
+        imagem.src = "parte01-img/3.jpg";
+        corpo.backgroundColor = '#fbed36'
+      } else {
+        imagem.src = "parte01-img/0.jpeg"
+        corpo.backgroundColor = '#001f8d'
+      }
+    </script>
+  </body>
+</html>
