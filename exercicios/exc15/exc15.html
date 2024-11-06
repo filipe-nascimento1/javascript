@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analizador de Imagens</title>
+    <style>
+      body{
+        background-color: #10b8fa;
+        text-align: center;
+        color: white;
+      }
+      h1{
+        font-size: 2.5em;
+      }
+      div{
+        background-color: white;
+        color: black;
+        margin: auto;
+        border-radius: 10px;
+        padding: 10px;
+        text-align: center;
+        font-family: Times New Roman;
+        box-shadow: 2px 2px 5px #00000081;
+      }
+      input{
+        margin-bottom: 8px;
+      }
+      input#verificar{
+        margin-top: 8px;
+        border-radius: 5px;
+      }
+      img.resposta{
+        border-radius: 150px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Verificador de Idade</h1>
+    <div>
+      Ano de Nascimento: <input type="number" name="anoNasc" id="anoNasc" value="2000"/>
+      Sexo:
+      <input type="radio" name="sex" id="masculino" checked=""/>
+      <label for="masculino">Masculino</label>
+      <input type="radio" name="sex" id="feminino" />
+      <label for="feminino">Feminino</label>
+      <br />
+      <input type="button" name="verificar" id="verificar" value="Verificar" onclick="verificar()"/>
+      <p class="resposta">Preencha os dados acima</p>
+      <img class="resposta" src="#" alt="" />
+    </div>
+    
+    <script>
+      function verificar() {
+        const dataAtual = new Date()
+        const anoAtual = dataAtual.getFullYear()
+        //Coletar Elementos
+        const anoNasc = document.querySelector('input#anoNasc').value
+        const sexo = document.getElementsByName('sex')
+        const pResposta = document.querySelector('p.resposta')
+        const imgResposta = document.querySelector('img.resposta')
+        
+        const idade = anoAtual - anoNasc
+        let genero = ''
+        let erro = false
+        if (anoNasc > anoAtual) {
+          erro = true
+          alert('[ERRO] Digite valores reais')
+        }
+        if (erro == false) {
+          if (sexo[0].checked) { //check homem
+            genero = 'Homem'
+            if (idade >= 0 && idade <= 15) {
+              imgResposta.src = 'image/hc.jpeg'
+            } else if (idade >= 16 && idade <= 45) {
+              imgResposta.src = 'image/ha.jpeg'
+            } else if (idade >= 46 && idade <= 120) {
+              imgResposta.src = 'image/hv.jpeg'
+            } else {
+              imgResposta.src = 'image/vampire.jpeg'
+            }
+          } else if (sexo[1].checked) { //check mulher
+            genero = 'Mulher'
+            if (idade >= 0 && idade <= 15) {
+              imgResposta.src = 'image/mc.jpeg'
+            } else if (idade >= 16 && idade <= 45) {
+              imgResposta.src = 'image/ma.jpeg'
+            } else if (idade >= 46 && idade <= 120) {
+              imgResposta.src = 'image/mv.jpeg'
+            }
+          }
+        }
+        
+        if (erro == false) {
+          pResposta.innerHTML = `Detectamos ${genero} com ${idade} anos`
+        }
+      }
+    </script>
+  </body>
+</html>
